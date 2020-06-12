@@ -1,0 +1,26 @@
+plugins {
+    id 'java'
+}
+
+group 'it.proof'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    jUnitVersion = '5.4.2'
+}
+
+dependencies {
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events 'PASSED', 'FAILED', 'SKIPPED'
+    }
+}
