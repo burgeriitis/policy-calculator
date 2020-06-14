@@ -1,4 +1,4 @@
-package it.proof;
+package it.proof.risk;
 
 import java.math.BigDecimal;
 
@@ -13,15 +13,15 @@ public class RiskCoefficients {
         this.firstStepCoefficient = firstStepCoefficient;
     }
 
-    public Double getDefaultCoefficient() {
+    public Double defaultCoefficient() {
         return defaultCoefficient;
     }
 
-    public BigDecimal getFirstStepAmount() {
+    public BigDecimal firstStepAmount() {
         return firstStepAmount;
     }
 
-    public Double getFirstStepCoefficient() {
+    public Double firstStepCoefficient() {
         return firstStepCoefficient;
     }
 }

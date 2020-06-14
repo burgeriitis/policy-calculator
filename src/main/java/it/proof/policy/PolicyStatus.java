@@ -1,4 +1,4 @@
-package it.proof;
+package it.proof.policy;
 
 public enum PolicyStatus {
     REGISTERED, APPROVED, DECLINED

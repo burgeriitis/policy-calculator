@@ -1,5 +1,8 @@
-package it.proof;
+package it.proof.policy;
 
+import it.proof.risk.RiskType;
+
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Policy {
@@ -11,5 +14,11 @@ public class Policy {
         this.number = number;
         this.status = status;
         this.policyObjects = policyObjects;
+    }
+
+    public BigDecimal totalInsuredSumByRisk(final RiskType riskType) {
+        return policyObjects.stream()
+                .map(obj -> obj.subObjectSumByType(riskType))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }
