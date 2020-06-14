@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public class RiskCoefficientFactory {
 
-    private static final RiskCoefficients fireRiskCoefficient = new RiskCoefficients(0.11, BigDecimal.valueOf(100), 0.05);
-    private static final RiskCoefficients theftRiskCoefficient = new RiskCoefficients(0.14, BigDecimal.valueOf(15), 0.024);
+    private static final RiskCoefficients fireRiskCoefficient = new RiskCoefficients(BigDecimal.valueOf(0.11), BigDecimal.valueOf(100), BigDecimal.valueOf(0.05));
+    private static final RiskCoefficients theftRiskCoefficient = new RiskCoefficients(BigDecimal.valueOf(0.14), BigDecimal.valueOf(15), BigDecimal.valueOf(0.024));
 
     public RiskCoefficients coefficientByRiskType(RiskType riskType) {
         switch (riskType) {

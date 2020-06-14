@@ -3,25 +3,34 @@ package it.proof.risk;
 import java.math.BigDecimal;
 
 public class RiskCoefficients {
-    private final Double defaultCoefficient;
-    private final BigDecimal firstStepAmount;
-    private final Double firstStepCoefficient;
 
-    public RiskCoefficients(Double defaultCoefficient, BigDecimal firstStepAmount, Double firstStepCoefficient) {
+    private final BigDecimal defaultCoefficient;
+    private final BigDecimal firstStepAmount;
+    private final BigDecimal firstStepCoefficient;
+
+    public RiskCoefficients(BigDecimal defaultCoefficient, BigDecimal firstStepAmount, BigDecimal firstStepCoefficient) {
         this.defaultCoefficient = defaultCoefficient;
         this.firstStepAmount = firstStepAmount;
         this.firstStepCoefficient = firstStepCoefficient;
     }
 
-    public Double defaultCoefficient() {
+    private BigDecimal defaultCoefficient() {
         return defaultCoefficient;
     }
 
-    public BigDecimal firstStepAmount() {
+    private BigDecimal firstStepAmount() {
         return firstStepAmount;
     }
 
-    public Double firstStepCoefficient() {
+    private BigDecimal firstStepCoefficient() {
         return firstStepCoefficient;
+    }
+
+    public BigDecimal calculateAmount(BigDecimal sum) {
+        if (firstStepAmount().compareTo(sum) <= 0) {//TODO fix calculation to pass all tests
+            return sum.multiply(firstStepCoefficient());
+        } else {
+            return sum.multiply(defaultCoefficient());
+        }
     }
 }
