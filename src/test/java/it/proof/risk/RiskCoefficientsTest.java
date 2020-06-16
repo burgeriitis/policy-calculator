@@ -12,43 +12,47 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RiskCoefficientsTest {
 
-    private static final BigDecimal FIRST_STEP_AMOUNT = BigDecimal.TEN;
+    public static final BigDecimal DEFAULT_COEFFICIENT_VALUE = BigDecimal.valueOf(0.02);
+    public static final BigDecimal FIRST_STEP_LOWER_BOUND = BigDecimal.TEN;
+    public static final BigDecimal FIRST_STEP_COEFFICIENT_VALUE = BigDecimal.valueOf(0.04);
 
     @ParameterizedTest
-    @MethodSource("sumAndExpected")
-    void calculateAmount_firstStepIncluded(BigDecimal sum, BigDecimal expected) {
+    @MethodSource("sumAndExpectedFirstStepInclusive")
+    void calculateAmount_firstStepInclusive(BigDecimal sum, BigDecimal expected) {
         BigDecimal actualAmount = riskCoefficients(true).calculateAmount(sum);
         assertEquals(expected, actualAmount);
     }
 
-    private static Stream<Arguments> sumAndExpected() {
+    private static Stream<Arguments> sumAndExpectedFirstStepInclusive() {
         return Stream.of(
                 Arguments.of(BigDecimal.ZERO, setScale(BigDecimal.ZERO)),
                 Arguments.of(BigDecimal.valueOf(5.56), BigDecimal.valueOf(0.1112)),
-                Arguments.of(FIRST_STEP_AMOUNT, setScale(BigDecimal.valueOf(0.4))),
+                Arguments.of(FIRST_STEP_LOWER_BOUND, setScale(BigDecimal.valueOf(0.4))),
                 Arguments.of(BigDecimal.valueOf(10.01), BigDecimal.valueOf(0.4004))
         );
     }
 
     @ParameterizedTest
-    @MethodSource("sumAndExpectedOther")
-    void calculateAmount_firstStepNotIncluded(BigDecimal sum, BigDecimal expected) {
+    @MethodSource("sumAndExpectedFirstStepExclusive")
+    void calculateAmount_firstStepExclusive(BigDecimal sum, BigDecimal expected) {
         BigDecimal actualAmount = riskCoefficients(false).calculateAmount(sum);
         assertEquals(expected, actualAmount);
     }
 
-    private static Stream<Arguments> sumAndExpectedOther() {
+    private static Stream<Arguments> sumAndExpectedFirstStepExclusive() {
         return Stream.of(
                 Arguments.of(BigDecimal.ZERO, setScale(BigDecimal.ZERO)),
                 Arguments.of(BigDecimal.valueOf(5.56), BigDecimal.valueOf(0.1112)),
-                Arguments.of(FIRST_STEP_AMOUNT, setScale(BigDecimal.valueOf(0.2))),
+                Arguments.of(FIRST_STEP_LOWER_BOUND, setScale(BigDecimal.valueOf(0.2))),
                 Arguments.of(BigDecimal.valueOf(10.01), BigDecimal.valueOf(0.4004))
         );
     }
 
     private RiskCoefficients riskCoefficients(Boolean isInclusive) {
-        return new RiskCoefficients(BigDecimal.valueOf(0.02),
-                new Coefficient(BigDecimal.TEN, BigDecimal.valueOf(0.04), isInclusive));
+        return new RiskCoefficients(
+                DEFAULT_COEFFICIENT_VALUE,
+                new Coefficient(FIRST_STEP_LOWER_BOUND, FIRST_STEP_COEFFICIENT_VALUE, isInclusive)
+        );
     }
 
     private static BigDecimal setScale(BigDecimal value) {

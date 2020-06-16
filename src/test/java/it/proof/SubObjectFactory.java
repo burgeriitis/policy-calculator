@@ -12,11 +12,19 @@ public class SubObjectFactory {
     public static final BigDecimal STOVE_INSURANCE_SUM = BigDecimal.TEN;
 
     public static SubObject theftInsuredKnife() {
-        return new SubObject("Knife", RiskType.THEFT, KNIFE_INSURANCE_SUM);
+        return theftInsuredKnife(KNIFE_INSURANCE_SUM);
+    }
+
+    public static SubObject theftInsuredKnife(BigDecimal insuranceSum) {
+        return new SubObject("Knife", RiskType.THEFT, insuranceSum);
     }
 
     public static SubObject fireInsuredPC() {
-        return new SubObject("PC", RiskType.FIRE, PC_INSURANCE_SUM);
+        return fireInsuredPC(PC_INSURANCE_SUM);
+    }
+
+    public static SubObject fireInsuredPC(BigDecimal insuranceSum) {
+        return new SubObject("PC", RiskType.FIRE, insuranceSum);
     }
 
     public static SubObject fireInsuredStove() {

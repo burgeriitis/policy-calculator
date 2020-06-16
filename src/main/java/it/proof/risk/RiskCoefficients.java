@@ -14,13 +14,13 @@ public class RiskCoefficients {
     }
 
     public BigDecimal calculateAmount(BigDecimal sum) {
-        int comparison = firstStep.lowerBound().compareTo(sum);
-        final BigDecimal actualCoefficient;
-        if (firstStep.isInclusive() && comparison <= 0 || !firstStep.isInclusive() && comparison < 0) {
-            actualCoefficient = firstStep.coefficient();
-        } else {
-            actualCoefficient = defaultCoefficient.coefficient();
-        }
+        final BigDecimal actualCoefficient = shouldUseFirstStep(sum) ? firstStep.coefficient() : defaultCoefficient.coefficient();
         return sum.multiply(actualCoefficient);
+    }
+
+    private boolean shouldUseFirstStep(BigDecimal sum) {
+        int firstStepCompareWithSum = firstStep.lowerBound().compareTo(sum);
+        return (firstStep.isInclusive() && firstStepCompareWithSum <= 0)
+                || (!firstStep.isInclusive() && firstStepCompareWithSum < 0);
     }
 }

@@ -1,5 +1,6 @@
 package it.proof.policy;
 
+import it.proof.ValidationException;
 import it.proof.risk.RiskType;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import java.util.Collections;
 
 import static it.proof.SubObjectFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PolicyTest {
 
@@ -22,6 +24,12 @@ class PolicyTest {
     void totalInsuredSumByRisk_theft() {
         BigDecimal actualSum = policyWithObjects().totalInsuredSumByRisk(RiskType.THEFT);
         assertEquals(KNIFE_INSURANCE_SUM, actualSum);
+    }
+
+    @Test
+    void totalInsuredSumByRisk_withoutRisk() {
+        BigDecimal actualSum = policyWithObjects().totalInsuredSumByRisk(null);
+        assertEquals(BigDecimal.ZERO, actualSum);
     }
 
     @Test

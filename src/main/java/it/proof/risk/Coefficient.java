@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 class Coefficient {
     private final BigDecimal lowerBound;
-    private final BigDecimal coefficient;
+    private final BigDecimal coefficientValue;
     private final Boolean isInclusive;
 
     static Coefficient inclusiveCoefficient(BigDecimal lowerBound, BigDecimal coefficient) {
@@ -15,10 +15,10 @@ class Coefficient {
         return new Coefficient(lowerBound, coefficient, false);
     }
 
-    Coefficient(BigDecimal lowerBound, BigDecimal coefficient, Boolean inclusive) {
+    Coefficient(BigDecimal lowerBound, BigDecimal coefficientValue, Boolean isInclusive) {
         this.lowerBound = lowerBound;
-        this.coefficient = coefficient;
-        this.isInclusive = inclusive;
+        this.coefficientValue = coefficientValue;
+        this.isInclusive = isInclusive;
     }
 
     BigDecimal lowerBound() {
@@ -26,7 +26,7 @@ class Coefficient {
     }
 
     BigDecimal coefficient() {
-        return coefficient;
+        return coefficientValue;
     }
 
     Boolean isInclusive() {

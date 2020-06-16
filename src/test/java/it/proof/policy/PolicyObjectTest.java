@@ -1,6 +1,8 @@
 package it.proof.policy;
 
+import it.proof.ValidationException;
 import it.proof.risk.RiskType;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -14,8 +16,14 @@ import java.util.stream.Stream;
 
 import static it.proof.SubObjectFactory.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PolicyObjectTest {
+
+    @Test
+    void policyCreation_failsWithException() {
+        assertThrows(ValidationException.class, () -> new PolicyObject("Af", Collections.emptyList()));
+    }
 
     @ParameterizedTest
     @MethodSource("riskTypes")

@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class PremiumCalculator {
+    public static final int EURO_SCALE = 2;
+
     private final RiskCoefficientFactory riskCoefficientFactory;
 
     public PremiumCalculator(RiskCoefficientFactory riskCoefficientFactory) {
@@ -19,7 +21,7 @@ public class PremiumCalculator {
         for (RiskType riskType : RiskType.values()) {
             premiumSum = premiumSum.add(sumForType(policy, riskType));
         }
-        return premiumSum.setScale(2, RoundingMode.HALF_UP);
+        return premiumSum.setScale(EURO_SCALE, RoundingMode.HALF_UP);
     }
 
     private BigDecimal sumForType(Policy policy, RiskType type) {
