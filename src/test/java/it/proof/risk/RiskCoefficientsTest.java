@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RiskCoefficientsTest {
 
-    public static final BigDecimal FIRST_STEP_AMOUNT = BigDecimal.TEN;
+    private static final BigDecimal FIRST_STEP_AMOUNT = BigDecimal.TEN;
 
     @ParameterizedTest
     @MethodSource("sumAndExpected")
     void calculateAmount_firstStepIncluded(BigDecimal sum, BigDecimal expected) {
-        BigDecimal actualAmount = riskCoefficients().calculateAmount(sum);
+        BigDecimal actualAmount = riskCoefficients(true).calculateAmount(sum);
         assertEquals(expected, actualAmount);
     }
 
@@ -33,7 +33,7 @@ class RiskCoefficientsTest {
     @ParameterizedTest
     @MethodSource("sumAndExpectedOther")
     void calculateAmount_firstStepNotIncluded(BigDecimal sum, BigDecimal expected) {
-        BigDecimal actualAmount = riskCoefficients().calculateAmount(sum);
+        BigDecimal actualAmount = riskCoefficients(false).calculateAmount(sum);
         assertEquals(expected, actualAmount);
     }
 
@@ -46,8 +46,9 @@ class RiskCoefficientsTest {
         );
     }
 
-    private RiskCoefficients riskCoefficients() {
-        return new RiskCoefficients(BigDecimal.valueOf(0.02), BigDecimal.TEN, BigDecimal.valueOf(0.04));
+    private RiskCoefficients riskCoefficients(Boolean isInclusive) {
+        return new RiskCoefficients(BigDecimal.valueOf(0.02),
+                new Coefficient(BigDecimal.TEN, BigDecimal.valueOf(0.04), isInclusive));
     }
 
     private static BigDecimal setScale(BigDecimal value) {

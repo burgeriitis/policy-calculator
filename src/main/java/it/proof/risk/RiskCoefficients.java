@@ -4,33 +4,23 @@ import java.math.BigDecimal;
 
 public class RiskCoefficients {
 
-    private final BigDecimal defaultCoefficient;
-    private final BigDecimal firstStepAmount;
-    private final BigDecimal firstStepCoefficient;
+    private final Coefficient defaultCoefficient;
 
-    public RiskCoefficients(BigDecimal defaultCoefficient, BigDecimal firstStepAmount, BigDecimal firstStepCoefficient) {
-        this.defaultCoefficient = defaultCoefficient;
-        this.firstStepAmount = firstStepAmount;
-        this.firstStepCoefficient = firstStepCoefficient;
-    }
+    private final Coefficient firstStep;
 
-    private BigDecimal defaultCoefficient() {
-        return defaultCoefficient;
-    }
-
-    private BigDecimal firstStepAmount() {
-        return firstStepAmount;
-    }
-
-    private BigDecimal firstStepCoefficient() {
-        return firstStepCoefficient;
+    public RiskCoefficients(BigDecimal defaultCoefficientValue, Coefficient firstStep) {
+        this.defaultCoefficient = Coefficient.inclusiveCoefficient(BigDecimal.ZERO, defaultCoefficientValue);
+        this.firstStep = firstStep;
     }
 
     public BigDecimal calculateAmount(BigDecimal sum) {
-        if (firstStepAmount().compareTo(sum) <= 0) {//TODO fix calculation to pass all tests
-            return sum.multiply(firstStepCoefficient());
+        int comparison = firstStep.lowerBound().compareTo(sum);
+        final BigDecimal actualCoefficient;
+        if (firstStep.isInclusive() && comparison <= 0 || !firstStep.isInclusive() && comparison < 0) {
+            actualCoefficient = firstStep.coefficient();
         } else {
-            return sum.multiply(defaultCoefficient());
+            actualCoefficient = defaultCoefficient.coefficient();
         }
+        return sum.multiply(actualCoefficient);
     }
 }

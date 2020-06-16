@@ -11,7 +11,6 @@ public class SubObjectFactory {
     public static final BigDecimal PC_INSURANCE_SUM = BigDecimal.valueOf(100.00);
     public static final BigDecimal STOVE_INSURANCE_SUM = BigDecimal.TEN;
 
-
     public static SubObject theftInsuredKnife() {
         return new SubObject("Knife", RiskType.THEFT, KNIFE_INSURANCE_SUM);
     }

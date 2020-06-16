@@ -15,6 +15,14 @@ public class PolicyObject {
         this.subObjects = subObjects;
     }
 
+    public String name() {
+        return name;
+    }
+
+    public List<SubObject> subObjects() {
+        return subObjects;
+    }
+
     public BigDecimal subObjectSumByType(RiskType type) {
         return subObjects.stream()
                 .filter(subObject -> subObject.riskType().equals(type))

@@ -16,6 +16,18 @@ public class Policy {
         this.policyObjects = policyObjects;
     }
 
+    public String number() {
+        return number;
+    }
+
+    public PolicyStatus status() {
+        return status;
+    }
+
+    public List<PolicyObject> policyObjects() {
+        return policyObjects;
+    }
+
     public BigDecimal totalInsuredSumByRisk(final RiskType riskType) {
         return policyObjects.stream()
                 .map(obj -> obj.subObjectSumByType(riskType))
