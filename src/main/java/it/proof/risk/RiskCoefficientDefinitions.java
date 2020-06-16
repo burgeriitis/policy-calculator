@@ -24,7 +24,7 @@ public class RiskCoefficientDefinitions implements RiskCoefficientFactory {
     );
 
     @Override
-    public RiskCoefficients getCoefficient(RiskType riskType) {
+    public RiskCoefficients getCoefficients(RiskType riskType) {
         if (riskType == null) {
             throw new ValidationException("Risk provided as null!");
         }

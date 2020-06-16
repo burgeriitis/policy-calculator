@@ -15,11 +15,11 @@ class RiskCoefficientFactoryTest {
     @ParameterizedTest
     @EnumSource(RiskType.class)
     void getCoefficient(RiskType riskType) {
-        assertNotNull(riskCoefficientFactory.getCoefficient(riskType));
+        assertNotNull(riskCoefficientFactory.getCoefficients(riskType));
     }
 
     @Test
     void getCoefficient_throwsException() {
-        assertThrows(ValidationException.class, () -> riskCoefficientFactory.getCoefficient(null));
+        assertThrows(ValidationException.class, () -> riskCoefficientFactory.getCoefficients(null));
     }
 }

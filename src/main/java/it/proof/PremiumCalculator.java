@@ -26,7 +26,7 @@ public class PremiumCalculator {
 
     private BigDecimal sumForType(Policy policy, RiskType type) {
         BigDecimal totalSumForType = policy.totalInsuredSumByRisk(type);
-        return riskCoefficientFactory.getCoefficient(type)
+        return riskCoefficientFactory.getCoefficients(type)
                 .calculateAmount(totalSumForType);
     }
 }

@@ -6,5 +6,5 @@ package it.proof.risk;
  */
 public interface RiskCoefficientFactory {
 
-    RiskCoefficients getCoefficient(RiskType riskType);
+    RiskCoefficients getCoefficients(RiskType riskType);
 }
