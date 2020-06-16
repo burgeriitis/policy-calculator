@@ -23,7 +23,7 @@ public class RiskCoefficientFactory {
             Coefficient.inclusiveCoefficient(THEFT_FIRST_STEP_LOWER_BOUND, THEFT_FIRST_STEP_COEFFICIENT)
     );
 
-    public RiskCoefficients coefficientByRiskType(RiskType riskType) {
+    public RiskCoefficients getCoefficient(RiskType riskType) {
         if (riskType == null) {
             throw new ValidationException("Risk provided as null!");
         }
