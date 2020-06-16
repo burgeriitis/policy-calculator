@@ -2,6 +2,7 @@ package it.proof;
 
 import it.proof.policy.Policy;
 import it.proof.policy.PolicyObject;
+import it.proof.risk.RiskCoefficientDefinitions;
 import it.proof.risk.RiskCoefficientFactory;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PremiumCalculatorTest {
 
-    private final RiskCoefficientFactory riskCoefficientFactory = new RiskCoefficientFactory();
+    private final RiskCoefficientFactory riskCoefficientFactory = new RiskCoefficientDefinitions();
     private final PremiumCalculator premiumCalculator = new PremiumCalculator(riskCoefficientFactory);
 
     @Test

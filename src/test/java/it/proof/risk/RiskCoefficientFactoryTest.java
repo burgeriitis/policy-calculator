@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RiskCoefficientFactoryTest {
 
-    private final RiskCoefficientFactory riskCoefficientFactory = new RiskCoefficientFactory();
+    private final RiskCoefficientDefinitions riskCoefficientFactory = new RiskCoefficientDefinitions();
 
     @ParameterizedTest
     @EnumSource(RiskType.class)
