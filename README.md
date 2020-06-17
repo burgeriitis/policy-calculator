@@ -1,4 +1,4 @@
-##Description
+## Description
 
 - Used technologies: Java 11, JUnit5 and Gradle. Code is written in self explanatory manner (as much as author could) using provided requirements.
 - Gradle wrapper is added to ensure build consistency between machines. 
@@ -8,3 +8,4 @@
 - If new risk type needs to be added code should be changed in 2 places:
     * new RiskType enum must be added;
     * values for new risk type Coefficients must be added in RiskCoefficientFactory.
+- Coeficient definition in this project are provided as constants in RiskCoefficientDefinitions. To use other ways of providing coeffients new implementation of RiskCoefficientFactory should be used. 
