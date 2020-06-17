@@ -7,5 +7,5 @@
 - As entrypoint is used PremiumCalculator.calculate method. This implementation can be run from unit test suite. Or if needed - used in further system evolution.
 - If new risk type needs to be added code should be changed in 2 places:
     * new RiskType enum must be added;
-    * values for new risk type Coefficients must be added in RiskCoefficientFactory.
+    * values for new risk type Coefficients must be added in RiskCoefficientDefinitions.
 - Coeficient definition in this project are provided as constants in RiskCoefficientDefinitions. To use other ways of providing coeffients new implementation of RiskCoefficientFactory should be used. 
